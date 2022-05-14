@@ -8,8 +8,16 @@
 export default {
   data() {
       return {
-        name: '宁皓⽹',
+        name: 'Ninghao',
       };
+  },
+
+  created(){
+    console.log('APP 组件已创建');
+
+    setTimeout(()=>{
+      this.name = '宁皓⽹';
+    },3000);
   },
 };
 </script>
