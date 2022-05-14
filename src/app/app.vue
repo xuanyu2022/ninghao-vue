@@ -14,10 +14,16 @@ export default {
 
   created(){
     console.log('APP 组件已创建');
+    this.setName();
+   
+  },
 
-    setTimeout(()=>{
-      this.name = '宁皓⽹';
-    },3000);
+  methods:{
+    setName(){
+         setTimeout(()=>{
+           this.name = '宁皓⽹';
+         },3000);
+    },
   },
 };
 </script>
