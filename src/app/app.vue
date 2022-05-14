@@ -1,50 +1,37 @@
 <template>
   <h3>{{ name }}</h3>
-  {{processStatus}}
-  <button v-on:click="resetName">重置</button>
-  <button @click="setName">恢复</button>
+  <div v-for="(post,index)  in postList" :key="post.id">
+     {{index + 1}} {{ post.content }} - <small>{{ post.author }}</small>
+  </div>
 </template>
 
 
 
 <script>
-export default {
-  data() {
-      return {
-        name: 'Ninghao',
-      };
-  },
-
-computed:{
-
-  processStatus(){
-    return this.name ==='Ninghao'? '初始化...' : '成功设置了数据';
-  }
-},
-
-watch:{
-  name(newName,oldName){
-    console.log(`name 发生了变化: ${oldName}->${newName}`);
-
-  }
-},
-  created(){
-    console.log('APP 组件已创建');
-    this.setName();
-   
-  },
-
-  methods:{
-    setName(){
-         setTimeout(()=>{
-           this.name = '宁皓⽹';
-         },3000);
-    },
-    resetName(){
-      this.name='Ninghao';
-    }
-  },
-};
+    export default {
+      data() {
+        return {
+          name:'Ninghao',
+          postList: [
+             {
+                id: 1,
+                content: '故⼈西辞黄鹤楼，烟花三⽉下扬州',
+                author: '李⽩',
+              },
+              {
+                id: 2,
+                content: '好⾬知时节，当春乃发⽣',
+                author: '杜甫',
+              },
+              {
+                id: 3,
+                content: '浔阳江头夜送客，枫叶荻花秋瑟瑟',
+                author: '⽩居易',
+              },
+          ],
+        };
+      },
+    };
 </script>
 
 <style>
