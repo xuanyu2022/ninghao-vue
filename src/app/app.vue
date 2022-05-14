@@ -1,5 +1,6 @@
 <template>
 <h3>{{ name }}</h3>
+{{processStatus}}
 </template>
 
 
@@ -12,6 +13,12 @@ export default {
       };
   },
 
+computed:{
+
+  processStatus(){
+    return this.name ==='Ninghao'? '初始化...' : '成功设置了数据';
+  }
+},
   created(){
     console.log('APP 组件已创建');
     this.setName();
