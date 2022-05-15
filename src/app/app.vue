@@ -1,7 +1,7 @@
 <template>
   <h3>{{ name }}</h3>
   
-<input type="text" @keyup.enter="onKeyupContent" />
+<input type="text" @change.enter="onChangeContent" />
 
 </template>
 
@@ -16,8 +16,8 @@
          };
       },
   methods: {
-onKeyupContent(event) {
-  console.log('回车');
+onChangeContent(event) {
+  console.log(event.target.value);
 },
 },
     };
