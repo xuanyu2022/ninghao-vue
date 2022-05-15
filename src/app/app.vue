@@ -1,17 +1,11 @@
 <template>
   <h3>{{ name }}</h3>
- 
-<label for="subscription-annual"> 
-  <input id="subscription-annual" type="radio" value="annual" v-model="subscription">
-  1年
-</label>
-<label for="subscription-quarterly"> 
-  <input id="subscription-quarterly" type="radio" value="quarterly" v-model="subscription">
- 季度
-</label>
-
-
-<span> -> subscription:{{subscription}}</span>
+<select v-model="category">
+  <option value=""> -选择分类-</option>
+  <option value="development">应用开发</option>
+  <option value="game"> 游戏开发 </option>
+</select>
+<span> -> Category:{{category}}</span>
 </template>
 
 
@@ -21,7 +15,7 @@
       data() {
         return {
           name:'Ninghao',
-          subscription:'annual',
+          category:'',
          };
       },
     };
