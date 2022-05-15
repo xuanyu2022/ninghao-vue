@@ -33,14 +33,5 @@
 
 
 <style>
- .menu{
-   display: flex;
-   gap:16px;  
-}
- .active{
-   color:#6435c9;
-   font-weight:bold;
- }
-
-
+@import './styles/app.css';
 </style>
