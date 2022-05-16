@@ -5,13 +5,14 @@
   <AppButton />
   <app-button/>
   <app-button></app-button>
+  <AppDemoButton />
 </template>
 
 
 
 <script>
 import AppButton from '@/components/app-button.vue';
- 
+ import AppDemoButton from '@/components/app-demo-button.vue';
     export default {
       data() {
         return {
@@ -19,7 +20,7 @@ import AppButton from '@/components/app-button.vue';
          
         };
       },
-      components:{AppButton},
+      components:{AppButton,AppDemoButton},
     };
 </script>
 
@@ -28,18 +29,5 @@ import AppButton from '@/components/app-button.vue';
 <style>
 
 
-.button {
-outline: none;
-border: none;
-background: #e1e1e1;
-color: #5a5a5a;
-padding: 8px 16px;
-margin: 4px;
-cursor: pointer;
-border-radius: 3px;
-}
-.button:active {
-opacity: 0.8;
-}
 
 </style>
