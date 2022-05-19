@@ -1,10 +1,27 @@
 <template>
-    <button class="button">按钮</button>
+    <button class="button" @click="$emit('tap',text)">{{text}}</button>
 </template>
 
 
-<style  scoped>
+<script>
+        export default{
+            props:{
+                text:{
+                    type:String,
+                    default:'按钮',
+                },
+            },
+             created(){
+                this.$emit('init');
+            },
+           
+           
+        };
 
+        
+</script>
+
+<style  scoped>
 .button {
 outline: none;
 border: none;

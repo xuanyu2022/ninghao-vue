@@ -1,7 +1,7 @@
 <template>
   <h3>{{ name }}</h3>
  
-  <AppButton> </AppButton>
+  <AppButton text="确定" @tap="onTapAppButton" @init="onInitAppButton"> </AppButton>
   <AppButton />
   <app-button/>
   <app-button></app-button>
@@ -17,10 +17,19 @@ import AppButton from '@/components/app-button.vue';
       data() {
         return {
           name:'Ninghao',
-         
+          
         };
       },
       components:{AppButton,AppDemoButton},
+
+      methods:{
+        onTapAppButton(text){
+          console.log('on tap app button');
+        },
+        onInitAppButton(text){
+          console.log('on init app button')
+        }
+      }
     };
 </script>
 
