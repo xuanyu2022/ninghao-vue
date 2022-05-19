@@ -1,18 +1,16 @@
 <template>
   <h3>{{ name }}</h3>
  
-  <AppButton text="确定" @tap="onTapAppButton" @init="onInitAppButton"> </AppButton>
-  <AppButton />
-  <app-button/>
-  <app-button></app-button>
-  <AppDemoButton />
+  <AppButton  @tap="onTapAppButton" @init="onInitAppButton">提交 </AppButton>
+  
 </template>
+
 
 
 
 <script>
 import AppButton from '@/components/app-button.vue';
- import AppDemoButton from '@/components/app-demo-button.vue';
+ 
     export default {
       data() {
         return {
@@ -20,7 +18,7 @@ import AppButton from '@/components/app-button.vue';
           
         };
       },
-      components:{AppButton,AppDemoButton},
+      components:{AppButton},
 
       methods:{
         onTapAppButton(text){
