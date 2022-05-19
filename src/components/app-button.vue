@@ -1,7 +1,7 @@
 <template>
     <button class="button" @click="$emit('tap',text)">
-        <slot name="icon"></slot>
-        <slot name="icon"></slot>
+        <slot></slot>
+       
     </button>
 </template>
 
