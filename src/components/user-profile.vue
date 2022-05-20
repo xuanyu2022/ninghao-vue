@@ -1,11 +1,12 @@
 <template>
-  <component :is="currentComponent"></component>
+  
+  <keep-alive><component :is="currentComponent"></component></keep-alive>
   <small @click="onClickHintText">{{ hintText }}</small>
 </template>
 <script>
   import UserLogin from './user-login.vue';
   import UserRegister from './user-register.vue';
-  
+
   export default {
     data() {
       return {
