@@ -2,7 +2,7 @@
   <h3 @click="onClickName">{{ name }}</h3>
 </template>
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
   data() {
     return {};
@@ -12,6 +12,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setName']),
+    ...mapActions(['getName']),
     onClickName() {
       if (this.$store.state.name === '宁皓⽹') {
         //this.$store.commit('setName', 'NINGHAO');
@@ -23,7 +24,8 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('getName');
+    //this.$store.dispatch('getName');
+    this.getName();
   },
 };
 </script>
