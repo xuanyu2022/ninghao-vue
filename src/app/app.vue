@@ -13,9 +13,7 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      appName: 'name',
-    }),
+    ...mapState(['name']),
   },
 };
 </script>
