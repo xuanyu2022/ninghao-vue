@@ -4,11 +4,23 @@ import { createStore } from 'vuex';
  */
 const store = createStore({
   state: {
-    name: '宁皓⽹',
+    name: '',
   },
   getters: {
     name(state) {
       return `🎈 ${state.name}`;
+    },
+  },
+  mutations: {
+    setName(state, data) {
+      state.name = data;
+    },
+  },
+
+  actions: {
+    getName(context) {
+      const name = '宁皓⽹';
+      context.commit('setName', name);
     },
   },
 });
