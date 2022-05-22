@@ -1,23 +1,24 @@
 <template>
-  <h3>{{ name }}</h3>
- 
-
+  <h3>{{ appName }}</h3>
 </template>
 
-
-
 <script>
-    export default {
-      data() {
-        return {
-          name:'Ninghao',
-         
-        };
-      },
+import { mapState } from 'vuex';
+
+export default {
+  data() {
+    return {
+      name: 'Ninghao',
     };
+  },
+
+  computed: {
+    ...mapState({
+      appName: 'name',
+    }),
+  },
+};
 </script>
-
-
 
 <style>
 @import './styles/app.css';
