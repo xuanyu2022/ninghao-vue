@@ -15,6 +15,9 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'about',
     component: About,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   {
@@ -50,4 +53,16 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+/**
+ * 元数据中的导航守卫
+ */
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (requiresAuth) {
+    console.log('👮');
+  }
+  next();
+});
+
 export default router;
