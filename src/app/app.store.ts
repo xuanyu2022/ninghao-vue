@@ -5,6 +5,7 @@ import { createStore } from 'vuex';
 const store = createStore({
   state: {
     name: '',
+    loading: false,
   },
   getters: {
     name(state) {
@@ -15,12 +16,26 @@ const store = createStore({
     setName(state, data) {
       state.name = data;
     },
+    setLoading(state, data) {
+      state.loading = data;
+    },
   },
 
-  actions: {
+  /* actions: {
     getName({ commit }) {
       const name = '宁皓⽹';
       commit('setName', name);
+    }, */
+
+  actions: {
+    getName({ commit }) {
+      commit('setLoading', true);
+
+      setTimeout(() => {
+        const name = '宁皓⽹';
+        commit('setName', name);
+        commit('setLoading', false);
+      }, 2000);
     },
   },
 });
