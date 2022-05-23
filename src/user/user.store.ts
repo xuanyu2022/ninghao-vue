@@ -6,6 +6,7 @@ export interface UserState {
 }
 //
 const store: Module<UserState, RootState> = {
+  namespaced: true,
   state: {
     currentUser: '',
   },
@@ -18,6 +19,11 @@ const store: Module<UserState, RootState> = {
     getCurrentUser(context) {
       const user = '王皓';
       context.commit('setCurrentUser', user);
+    },
+  },
+  getters: {
+    currentUser(state) {
+      return state.currentUser;
     },
   },
 };

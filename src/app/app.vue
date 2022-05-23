@@ -3,8 +3,10 @@
     {{ name }}
     <span v-if="loading">加载中...</span>
   </h3>
-  {{ userStateModule.currentUser }}
+  <!-- {{ userStateModule.currentUser }} -->
+  {{ currentUser }}
 </template>
+
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
@@ -13,7 +15,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['name']),
+    // ...mapGetters(['name']),
+    ...mapGetters({
+      name: 'name',
+      currentUser: 'userStateModule/currentUser',
+    }),
     ...mapState(['loading', 'userStateModule']),
   },
 
@@ -25,8 +31,11 @@ export default {
 
   methods: {
     ...mapMutations(['setName']),
-    ...mapActions(['getName', 'getCurrentUser']),
-
+    //...mapActions(['getName', 'getCurrentUser']),
+    ...mapActions({
+      getName: 'getName',
+      getCurrentUser: 'userStateModule/getCurrentUser',
+    }),
     onClickName() {
       if (this.$store.state.name === '宁皓⽹') {
         //this.$store.commit('setName', 'NINGHAO');
