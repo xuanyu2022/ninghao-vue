@@ -1,4 +1,11 @@
 import { createStore } from 'vuex';
+import userStateModule, { UserState } from '@/user/user.store';
+
+export interface RootState {
+  name: string;
+  loading: boolean;
+  userStateModule?: UserState;
+}
 /**
  * 创建 Store
  */
@@ -37,6 +44,10 @@ const store = createStore({
         commit('setLoading', false);
       }, 2000);
     },
+  },
+
+  modules: {
+    userStateModule,
   },
 });
 
