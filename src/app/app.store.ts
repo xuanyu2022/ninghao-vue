@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import userStateModule, { UserState } from '@/user/user.store';
-
+import { logger } from './app.plugin';
 export interface RootState {
   name: string;
   loading: boolean;
@@ -49,6 +49,7 @@ const store = createStore({
   modules: {
     userStateModule,
   },
+  plugins: [logger],
 });
 
 export default store;
