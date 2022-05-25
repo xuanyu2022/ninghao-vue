@@ -26,6 +26,7 @@ label {
         opacity: 0;
         transform: translateX(30px);
         }
+/*动画  */
 @keyframes pulse {
             from {
                      transform: scale3d(1, 1, 1);
@@ -63,7 +64,12 @@ label {
 .slide-leave-to {
 opacity: 0;
 }
+/* 9.4.3进入和离开动画 */
 
-
-
+.pulse-enter-active {
+    animation: pulse 1s;
+    }
+.pulse-leave-active {
+    animation: pulse 1s;
+    }
 

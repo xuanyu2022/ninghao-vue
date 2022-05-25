@@ -8,8 +8,9 @@
       <div class="card__content">
         <!--  <div :class="['emoji', { hidden: !isActive }]">🌲</div> -->
         <!--  <div :class="['emoji', { pulse: isActive }]">😍</div> -->
-        <transition name="slide">
-          <div v-if="isActive" class="emoji">🌵</div>
+        <transition name="pulse">
+          <!-- <div v-if="isActive" class="emoji">🌵</div> -->
+          <div v-if="isActive" class="emoji">👻</div>
         </transition>
       </div>
       <div class="card__action">
