@@ -8,15 +8,23 @@
       <div class="card__content">
         <!--  <div :class="['emoji', { hidden: !isActive }]">🌲</div> -->
         <!--  <div :class="['emoji', { pulse: isActive }]">😍</div> -->
-        <transition
-          name="custom-classes"
-          enter-active-class="animate__animated animate__tada"
-          leave-active-class="animate__animated animate__bounce"
+        <transition-group
+          name="custom"
+          leave-active-class="animate__animated animate__tada"
         >
-          <!-- <div v-if="isActive" class="emoji">🌵</div> -->
-          <!--  <div v-if="isActive" class="emoji">👻</div> -->
-          <component :is="currentEmoji"></component>
-        </transition>
+          <div class="emoji" v-for="emoji in emojiList" :key="emoji">
+            {{ emoji }}
+          </div>
+        </transition-group>
+      </div>
+
+      <div class="card__action">
+        <button @click="shuffle" :class="{ active: isActive }">
+          洗牌
+        </button>
+        <button @click="pop">
+          删除
+        </button>
       </div>
       <div class="card__action">
         <button @click="isActive = !isActive">请按这⾥</button>
@@ -26,27 +34,28 @@
 </template>
 
 <script>
-import GhostEmoji from './components/ghost-emoji.vue';
-import RobotEmoji from './components/robot-emoji.vue';
+import _ from 'lodash';
 
 export default {
   data() {
     return {
       name: '宁皓⽹',
       isActive: true,
+      emojiList: ['🌲 ', '🌳 ', '🌴'],
     };
   },
-  computed: {
-    currentEmoji() {
-      return this.isActive ? 'GhostEmoji' : 'RobotEmoji';
+
+  methods: {
+    shuffle() {
+      this.emojiList = _.shuffle(this.emojiList);
     },
-  },
-  components: {
-    GhostEmoji,
-    RobotEmoji,
+    pop() {
+      this.emojiList.pop();
+    },
   },
 };
 </script>
+
 <style>
 @import './styles/app.css';
 @import './styles/card.css';
