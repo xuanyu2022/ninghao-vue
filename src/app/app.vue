@@ -8,7 +8,7 @@
       <div class="card__content">
         <!--  <div :class="['emoji', { hidden: !isActive }]">🌲</div> -->
         <!--  <div :class="['emoji', { pulse: isActive }]">😍</div> -->
-        <transition-group
+        <!--    <transition-group
           name="custom"
           leave-active-class="animate__animated animate__tada"
         >
@@ -24,10 +24,13 @@
         </button>
         <button @click="pop">
           删除
-        </button>
+        </button> -->
+        <div class="emoji">{{ animatedNumber }}</div>
       </div>
       <div class="card__action">
-        <button @click="isActive = !isActive">请按这⾥</button>
+        <button @click="number = number + 10" :class="{ active: isActive }">
+          请按这⾥
+        </button>
       </div>
     </div>
   </div>
@@ -35,6 +38,7 @@
 
 <script>
 import _ from 'lodash';
+import gsap from 'gsap';
 
 export default {
   data() {
@@ -42,9 +46,20 @@ export default {
       name: '宁皓⽹',
       isActive: true,
       emojiList: ['🌲 ', '🌳 ', '🌴'],
+      number: 0,
+      tweenedNumber: 0,
     };
   },
-
+  computed: {
+    animatedNumber() {
+      return this.tweenedNumber.toFixed(0);
+    },
+  },
+  watch: {
+    number(newValue) {
+      gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
+    },
+  },
   methods: {
     shuffle() {
       this.emojiList = _.shuffle(this.emojiList);
