@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { watch, onMounted, reactive, ref } from 'vue';
 
 export default {
   setup() {
@@ -17,7 +17,15 @@ export default {
     };
     console.log(name.value);
     console.log(user);
-
+    onMounted(() => {
+      console.log('mounted');
+    });
+    watch(name, (newName, oldName) => {
+      console.log(newName, oldName);
+    });
+    watch(user, (newUser, oldUser) => {
+      console.log(newUser, oldUser);
+    });
     return {
       name,
       user,
