@@ -1,10 +1,11 @@
 <template>
   <h3 @click="name = 'NINGHAO'">{{ name }}</h3>
   <div @click="user.name = 'WANGHAO'">{{ user.name }}</div>
+  <h3 @click="changeName">{{ nameEmoji }}</h3>
 </template>
 
 <script>
-import { watch, onMounted, reactive, ref } from 'vue';
+import { watch, onMounted, reactive, ref, computed } from 'vue';
 
 export default {
   setup() {
@@ -26,10 +27,12 @@ export default {
     watch(user, (newUser, oldUser) => {
       console.log(newUser, oldUser);
     });
+    const nameEmoji = computed(() => `${name.value} 🏕`);
     return {
       name,
       user,
       changeName,
+      nameEmoji,
     };
   },
 };
