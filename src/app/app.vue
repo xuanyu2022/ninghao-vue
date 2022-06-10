@@ -4,6 +4,7 @@
     {{ post.title }} -
     <small>{{ post.user.name }}</small>
   </div>
+  <div>{{ errorMessage }}</div>
 </template>
 
 <script>
@@ -13,13 +14,21 @@ export default {
     return {
       name: '宁皓⽹',
       posts: [],
+      errorMessage: '',
     };
   },
   created() {
-    axios.get('http://localhost:3000/posts').then(response => {
-      console.log(response);
-      this.posts = response.data;
-    });
+    axios
+      .get('http://localhost:3000/posts1')
+      .then(response => {
+        console.log(response);
+        this.posts = response.data;
+      })
+      .catch(error => {
+        console.log(error.message);
+        console.log(error.response);
+        this.errorMessage = error.message;
+      });
   },
 };
 </script>
