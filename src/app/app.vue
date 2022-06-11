@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { axios } from '@/app/app.service';
+import { apiHttpClient } from '@/app/app.service';
 
 export default {
   data() {
@@ -16,13 +16,20 @@ export default {
       name: '宁皓⽹',
       posts: [],
       errorMessage: '',
+      user: {
+        name: '王皓',
+        password: '123123',
+      },
+      token: '',
     };
   },
   async created() {
     try {
-      const response = await axios.get('/posts');
-      console.log(axios.defaults);
-      this.posts = response.data;
+      const response = await apiHttpClient.post('/login', this.user);
+      // console.log(axios.defaults);
+      this.token = response.data.token;
+      console.log(response.data);
+      console.log(this.token);
     } catch (error) {
       this.errorMessage = error.message;
     }
