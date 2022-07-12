@@ -1,5 +1,12 @@
 <template>
-  <UserLogin />
+  <UserLogin 
+ v-if="!isLoggedIn"
+  @login-success="onLoginSuccess"
+  @login-error="onLoginError"
+  />
+  <div v-if="currentUser">{{currentUser.name}}</div>
+
+
   <h3>{{ name }}</h3>
   <input type="text" v-model="title" @keyup.enter="createPost" />
   <div>{{ errorMessage }}</div>
@@ -28,15 +35,33 @@ export default {
      
       token: '',
       title: '',
+      checked: true,
+      content: '天地玄黄 ',
+      tags:[],
+      currentUser:null,
     };
   },
   
   components:{
     UserLogin,
   },
-
+  computed: {
+    isLoggedIn(){
+      return this.token ? true:false;
+    }
+  },
   async created() {
     this.getPosts();
+    const tid = localStorage.getItem('tid');
+    const uid = localStorage.getItem('uid');
+
+    if(tid){
+      this.token=tid;
+    }
+    if(uid){
+      this.getCurrentUser(uid);
+    }
+
     // try {
     //   const response = await apiHttpClient.post('/login', this.user);
     //   // console.log(axios.defaults);
@@ -49,6 +74,24 @@ export default {
   },
 
   methods: {
+    async getCurrentUser (userId){
+      try {
+        const response = await apiHttpClient.get(`/users/${userId}`);
+        this.currentUser = response.data;
+      } catch (error) {
+        this.errorMessage = error.message;
+      }
+    },
+
+      onLoginSuccess(data) {
+            this.token = data.token;
+            this.getCurrentUser(data.id);
+            localStorage.setItem('tid',data.token);
+            localStorage.setItem('uid',data.id);
+            },
+      onLoginError(error) {
+            this.errorMessage = error.data.message;
+            },
     //删除内容
     async deletePost(postId) {
       try {
