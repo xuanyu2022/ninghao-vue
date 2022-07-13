@@ -4,7 +4,12 @@
   @login-success="onLoginSuccess"
   @login-error="onLoginError"
   />
-  <div v-if="currentUser">{{currentUser.name}}</div>
+  
+
+  <div v-if="currentUser">
+    <div>{{currentUser.name}}</div>
+    <button @click="logout">退出</button>
+  </div>
 
 
   <h3>{{ name }}</h3>
@@ -74,6 +79,13 @@ export default {
   },
 
   methods: {
+
+    logout(){
+      this.token='';
+      this.currentUser=null;
+      localStorage.removeItem('tid');
+      localStorage.removeItem('uid');
+    },
     async getCurrentUser (userId){
       try {
         const response = await apiHttpClient.get(`/users/${userId}`);
