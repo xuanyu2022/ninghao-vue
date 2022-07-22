@@ -4,7 +4,7 @@
   @login-success="onLoginSuccess"
   @login-error="onLoginError"
   />
-  
+ 
 
   <div v-if="currentUser">
     <div>{{currentUser.name}}</div>
@@ -13,7 +13,15 @@
 
 
   <h3>{{ name }}</h3>
+   
+
   <input type="text" v-model="title" @keyup.enter="createPost" />
+  <input type="file" ref="file" @change="onChangeFile" accept="image/png,image/jpg,image/jpeg" 
+  />
+  <div v-if="imagePreviewUrl">
+<img class="image-preview" :src="imagePreviewUrl" />
+</div>
+
   <div>{{ errorMessage }}</div>
 
   <div v-for="post in posts" :key="post.id">
@@ -44,6 +52,10 @@ export default {
       content: '天地玄黄 ',
       tags:[],
       currentUser:null,
+      file:null,
+    
+      imagePreviewUrl: null,
+      
     };
   },
   
@@ -79,7 +91,51 @@ export default {
   },
 
   methods: {
+    async createFile(file, postId) {
+      console.log('测试创建文件');
+      // 创建表单
+      const formData = new FormData();
+      // 添加字段
+      formData.append('file', file);
+      // 上传⽂件
+      try {
+          const response = await apiHttpClient.post(
+            `/files?post=${postId}`,
+             formData,
+            {
+              headers: {
+              Authorization: `Bearer ${this.token}`,
+              },
+            },
+          );
+          // 清理
+          this.file = null;
+          this.imagePreviewUrl = null;
+          this.$refs.file.value = '';
+          console.log(response.data);
+      } catch (error) {
+          this.errorMessage = error.message;
+      } 
+      },
 
+    createImagePreview(file) {
+        const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = event => {
+            this.imagePreviewUrl = event.target.result;
+        };
+    },
+
+   
+    onChangeFile(event){
+       console.log(event.target.files);
+       const file=event.target.files[0];
+       if(file){
+        this.file=file;
+        this.title=file.name.split('.')[0];
+        this.createImagePreview(file);
+       }
+    },
     logout(){
       this.token='';
       this.currentUser=null;
@@ -164,9 +220,13 @@ export default {
             },
           },
         );
+        if (this.file) {
+             this.createFile(this.file, response.data.insertId);
+            
+        }
         console.log(response.data);
         this.title = '';
-        this.getPosts();
+        this.getPosts();  
       } catch (error) {
         this.errorMessage = error.message;
       }
