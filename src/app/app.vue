@@ -19,9 +19,15 @@
   <input type="file" ref="file" @change="onChangeFile" accept="image/png,image/jpg,image/jpeg" 
   />
 
- <div class="drag-zone" @dragover.prevent @drop.prevent="onDropDragZone">
-<div>把图像⽂件拖放到这⾥</div>
-</div>
+  <div
+      :class="['drag-zone', { active: dragZoneActive }]"
+      @dragover.prevent
+      @drop.prevent="onDropDragZone"
+      @dragenter="dragZoneActive = true"
+      @dragleave="dragZoneActive = false"
+  >
+  <div>把图像⽂件拖放到这⾥</div>
+  </div>
 
   <div v-if="imageUploadProgress">
     <span class="image-upload-progress">{{ imageUploadProgress + '%' }}</span>
@@ -65,6 +71,8 @@ export default {
       imagePreviewUrl: null,
       
       imageUploadProgress: null,
+      
+      dragZoneActive: false,
       
     };
   },
