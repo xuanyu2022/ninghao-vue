@@ -18,6 +18,14 @@
   <input type="text" v-model="title" @keyup.enter="createPost" />
   <input type="file" ref="file" @change="onChangeFile" accept="image/png,image/jpg,image/jpeg" 
   />
+
+ <div class="drag-zone" @dragover.prevent @drop.prevent="onDropDragZone">
+<div>把图像⽂件拖放到这⾥</div>
+</div>
+
+  <div v-if="imageUploadProgress">
+    <span class="image-upload-progress">{{ imageUploadProgress + '%' }}</span>
+  </div>
   <div v-if="imagePreviewUrl">
 <img class="image-preview" :src="imagePreviewUrl" />
 </div>
@@ -56,6 +64,8 @@ export default {
     
       imagePreviewUrl: null,
       
+      imageUploadProgress: null,
+      
     };
   },
   
@@ -91,6 +101,17 @@ export default {
   },
 
   methods: {
+    onDropDragZone(event) {
+        console.log(event.dataTransfer.files);
+        const file = event.dataTransfer.files[0];
+        if (file) {
+            this.file = file;
+            // 设置内容标题
+            this.title = file.name.split('.')[0];
+            // ⽣成预览图像
+            this.createImagePreview(file);
+        }
+    },
     async createFile(file, postId) {
       console.log('测试创建文件');
       // 创建表单
@@ -106,6 +127,13 @@ export default {
               headers: {
               Authorization: `Bearer ${this.token}`,
               },
+           
+
+              onUploadProgress: event => {
+                console.log(event);
+                const { loaded, total } = event;
+                this.imageUploadProgress = Math.round((loaded * 100) / total);
+                },
             },
           );
           // 清理
