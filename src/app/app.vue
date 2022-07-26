@@ -14,7 +14,11 @@
          
         };
       },
+      created() {
+           console.log(this.$store.state);
+      },
     };
+   
 </script>
 
 
