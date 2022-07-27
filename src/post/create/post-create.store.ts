@@ -1,6 +1,16 @@
-export const postCreateStoreModule = {
-    namespaced: true,//使用命名空间
-      state: {
-      loading: false,
-      },
-  };
+import { Module } from 'vuex';
+import { RootState } from '../../app/app.store';
+export interface PostCreateStoreState {
+  loading: boolean;
+}
+export const postCreateStoreModule: Module<PostCreateStoreState, RootState> = {
+  namespaced: true,
+  state: {
+    loading: false,
+  } as PostCreateStoreState,
+  getters: {
+   loading(state) {
+     return state.loading;
+   },
+  },
+};
