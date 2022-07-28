@@ -1,6 +1,7 @@
 <template>
-  <h3>{{ name }}</h3>
- 
+  <h3>
+    <router-link to="/posts">{{ name }}</router-link></h3>
+  <router-view></router-view>
 
 </template>
 
