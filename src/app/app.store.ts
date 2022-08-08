@@ -15,6 +15,9 @@ const store = createStore({
   state: {
     appName: '宁皓⽹',
   } as RootState,
+  modules: {
+    post: postStoreModule,
+  },
 });
 
 /**

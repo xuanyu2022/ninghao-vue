@@ -1,20 +1,25 @@
 import { Module } from 'vuex';
 import { RootState } from '../app/app.store';
 import {
-postCreateStoreModule,
-PostCreateStoreState,
+  postCreateStoreModule,
+  PostCreateStoreState,
 } from './create/post-create.store';
+import { postIndexStoreModule } from './index/post-index.store';
 
 export interface PostStoreState {
   create: PostCreateStoreState;
-  }
-export interface AbcdEfg{
-  hah: RootState;
+}
+export interface PostItem {
+  id: number;
+  title: string;
+  content: string;
 }
 
 export const postStoreModule: Module<PostStoreState, RootState> = {
-    namespaced: true,
-    modules: {
-      create: postCreateStoreModule,
-    },
+  namespaced: true,
+
+  modules: {
+    create: postCreateStoreModule,
+    index: postIndexStoreModule,
+  },
 };
